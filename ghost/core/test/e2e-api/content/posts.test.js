@@ -154,6 +154,16 @@ describe('Posts Content API', function () {
             })
             .matchBodySnapshot();
     });
+    // &fields=title,url,reading_time
+    it('Can request fields of posts with reading_time param', async function () {
+        await agent
+            .get('posts/?&fields=title,url,reading_time')
+            .expectStatus(200)
+            .matchHeaderSnapshot({
+                etag: anyEtag
+            })
+            .matchBodySnapshot();
+    });
 
     it('Can include relations', async function () {
         await agent

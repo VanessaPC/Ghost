@@ -6,6 +6,13 @@ const allowedIncludes = ['tags', 'authors', 'tiers'];
 const messages = {
     postNotFound: 'Post not found.'
 };
+// This should be cleaned up to a utils file.
+const readingTimeHelper = (frame) => {
+    if (frame.options.columns.includes('reading_time') && !frame.options.columns.includes('html')) {
+        frame.options.columns.push('html');
+        frame.options.htmlFetchedForReadingTime = true;
+    }
+};
 
 module.exports = {
     docName: 'posts',
@@ -34,6 +41,10 @@ module.exports = {
         },
         permissions: true,
         query(frame) {
+            if (frame.options.columns) { 
+                readingTimeHelper(frame);
+            }
+
             return models.Post.findPage(frame.options);
         }
     },

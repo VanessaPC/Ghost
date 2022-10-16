@@ -65,6 +65,12 @@ module.exports = async (model, frame, options = {}) => {
         } else {
             jsonModel.comments = false;
         }
+
+        // Delete the html data if it was only fetched from the database to calculate reading_time.
+        if (jsonModel.html && frame.options.htmlFetchedForReadingTime) {
+            delete jsonModel.html;
+            delete jsonModel.plaintext;
+        }
     }
 
     // Transforms post/page metadata to flat structure

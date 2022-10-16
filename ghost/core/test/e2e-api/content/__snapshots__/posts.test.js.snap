@@ -2435,6 +2435,90 @@ Object {
 }
 `;
 
+exports[`Posts Content API Can request fields of posts with reading_time param 1: [body] 1`] = `
+Object {
+  "meta": Object {
+    "pagination": Object {
+      "limit": 15,
+      "next": null,
+      "page": 1,
+      "pages": 1,
+      "prev": null,
+      "total": 11,
+    },
+  },
+  "posts": Array [
+    Object {
+      "reading_time": 2,
+      "title": "Start here for a quick overview of everything you need to know",
+      "url": "http://127.0.0.1:2369/welcome/",
+    },
+    Object {
+      "reading_time": 3,
+      "title": "Customizing your brand and design settings",
+      "url": "http://127.0.0.1:2369/design/",
+    },
+    Object {
+      "reading_time": 5,
+      "title": "Writing and managing content in Ghost, an advanced guide",
+      "url": "http://127.0.0.1:2369/write/",
+    },
+    Object {
+      "reading_time": 2,
+      "title": "Building your audience with subscriber signups",
+      "url": "http://127.0.0.1:2369/portal/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "Selling premium memberships with recurring revenue",
+      "url": "http://127.0.0.1:2369/sell/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "How to grow your business around an audience",
+      "url": "http://127.0.0.1:2369/grow/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "Setting up apps and custom integrations",
+      "url": "http://127.0.0.1:2369/integrations/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "Not so short, bit complex",
+      "url": "http://127.0.0.1:2369/not-so-short-bit-complex/",
+    },
+    Object {
+      "reading_time": 0,
+      "title": "Short and Sweet",
+      "url": "http://127.0.0.1:2369/short-and-sweet/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "Ghostly Kitchen Sink",
+      "url": "http://127.0.0.1:2369/ghostly-kitchen-sink/",
+    },
+    Object {
+      "reading_time": 1,
+      "title": "HTML Ipsum",
+      "url": "http://127.0.0.1:2369/html-ipsum/",
+    },
+  ],
+}
+`;
+
+exports[`Posts Content API Can request fields of posts with reading_time param 2: [headers] 1`] = `
+Object {
+  "access-control-allow-origin": "*",
+  "cache-control": "public, max-age=0",
+  "content-length": "1304",
+  "content-type": "application/json; charset=utf-8",
+  "etag": StringMatching /\\(\\?:W\\\\/\\)\\?"\\(\\?:\\[ !#-\\\\x7E\\\\x80-\\\\xFF\\]\\*\\|\\\\r\\\\n\\[\\\\t \\]\\|\\\\\\\\\\.\\)\\*"/,
+  "vary": "Accept-Version, Accept-Encoding",
+  "x-powered-by": "Express",
+}
+`;
+
 exports[`Posts Content API Can request posts 1: [body] 1`] = `
 Object {
   "meta": Object {
