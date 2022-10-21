@@ -31,6 +31,10 @@ module.exports = class CommentsController {
         }
     }
 
+    async #emitCommentCount(frame, postId) {
+        const commentCount = await this.count(frame);
+        frame.original.ws.emit('comment-count', {postId, commentCount: commentCount[postId]});
+    }
     /**
      * @param {Frame} frame
      */
@@ -59,11 +63,17 @@ module.exports = class CommentsController {
         this.#checkMember(frame);
 
         if (frame.data.comments[0].status === 'deleted') {
-            return await this.service.deleteComment(
+            const comment = await this.service.deleteComment(
                 frame.options.id,
                 frame?.options?.context?.member?.id,
                 frame.options
             );
+
+            const postId = comment.get('post_id');
+
+            this.#emitCommentCount(frame, postId);
+            
+            return comment;
         }
 
         return await this.service.editCommentContent(
@@ -82,12 +92,16 @@ module.exports = class CommentsController {
         const data = frame.data.comments[0];
 
         if (data.parent_id) {
-            return await this.service.replyToComment(
+            const response = await this.service.replyToComment(
                 data.parent_id,
                 frame.options.context.member.id,
                 data.html,
                 frame.options
             );
+
+            this.#emitCommentCount(frame, data.post_id);
+
+            return response;
         }
 
         const response = await this.service.commentOnPost(
@@ -97,12 +111,7 @@ module.exports = class CommentsController {
             frame.options
         );
 
-        const commentCount = await this.count(frame);
-
-        frame.original.ws.emit('comment-added', {
-            postId: data.post_id,
-            commentCount: Object.values(commentCount)[0]
-        });
+        this.#emitCommentCount(frame, data.post_id);
 
         return response;
     }
