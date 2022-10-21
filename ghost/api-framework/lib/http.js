@@ -52,7 +52,8 @@ const http = (apiImpl) => {
                 user: user,
                 integration: integration,
                 member: (req.member || null)
-            }
+            },
+            ws: req.ws
         });
 
         frame.configure({

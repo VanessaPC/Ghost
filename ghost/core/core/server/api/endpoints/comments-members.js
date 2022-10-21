@@ -130,6 +130,7 @@ module.exports = {
         }
     },
 
+    // can I broadcast this alone?
     counts: {
         permissions: false,
         async query(frame) {

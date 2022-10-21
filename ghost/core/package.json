@@ -135,6 +135,7 @@
     "bookshelf-relations": "2.4.0",
     "brute-knex": "4.0.1",
     "bson-objectid": "2.0.3",
+    "bufferutil": "^4.0.6",
     "chalk": "4.1.2",
     "cheerio": "0.22.0",
     "common-tags": "1.8.2",
@@ -180,7 +181,9 @@
     "rss": "1.2.2",
     "sanitize-html": "2.7.2",
     "semver": "7.3.8",
+    "socket.io": "^4.5.3",
     "stoppable": "1.1.0",
+    "utf-8-validate": "^5.0.9",
     "uuid": "9.0.0",
     "xml": "1.0.1"
   },

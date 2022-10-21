@@ -90,12 +90,21 @@ module.exports = class CommentsController {
             );
         }
 
-        return await this.service.commentOnPost(
+        const response = await this.service.commentOnPost(
             data.post_id,
             frame.options.context.member.id,
             data.html,
             frame.options
         );
+
+        const commentCount = await this.count(frame);
+
+        frame.original.ws.emit('comment-added', {
+            postId: data.post_id,
+            commentCount: Object.values(commentCount)[0]
+        });
+
+        return response;
     }
 
     async destroy() {

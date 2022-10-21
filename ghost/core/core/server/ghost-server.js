@@ -7,6 +7,7 @@ const logging = require('@tryghost/logging');
 const notify = require('./notify');
 const moment = require('moment');
 const stoppable = require('stoppable');
+const {Server} = require('socket.io');
 
 const messages = {
     cantTouchThis: 'Can\'t touch this',
@@ -54,6 +55,7 @@ class GhostServer {
 
         this.rootApp = null;
         this.httpServer = null;
+        this.ws = null;
 
         // Tasks that should be run before the server exits
         this.cleanupTasks = [];
@@ -81,6 +83,13 @@ class GhostServer {
                 port,
                 host
             );
+            
+            self.ws = new Server(self.httpServer);
+            
+            rootApp.use(function (req, res, next) {
+                req.ws = self.ws;
+                next();
+            });
 
             self.httpServer.on('error', function (error) {
                 let ghostError;
@@ -99,7 +108,6 @@ class GhostServer {
                     });
                 }
 
-                debug('Notifying server started (error)');
                 return notify.notifyServerStarted()
                     .finally(() => {
                         reject(ghostError);
